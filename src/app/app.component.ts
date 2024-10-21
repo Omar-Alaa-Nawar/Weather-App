@@ -6,6 +6,8 @@ import { WeatherService } from './services/weather.service';
 import { WeatherData } from './models/weather.model';
 import { FormsModule } from '@angular/forms';
 
+type Mode = 'day' | 'night' | 'default' | 'hot-night' | 'clear';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -107,6 +109,11 @@ export class AppComponent implements OnInit {
     console.log('isNightTime:', isNight);
     return isNight;
   }
+
+  isHotNight(): boolean {
+    return this.isNightTime() && this.weatherData?.main?.temp !== undefined && this.weatherData.main.temp > 30;
+  }
+  
 
   isSunnyDay(): boolean {
     return !this.isNightTime() && this.weatherData?.main?.temp !== undefined && this.weatherData.main.temp > 30;

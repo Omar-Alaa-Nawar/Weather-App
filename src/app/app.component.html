@@ -1,10 +1,11 @@
 <div class="frame" [ngClass]="{
-  'night-mode': isNightTime(),
+  'hot-night-mode': isHotNight(),
+  'night-mode': isNightTime() && !isHotNight(),
   'sunny-mode': isSunnyDay(),
   'cold-day-mode': isCold() && !isNightTime(),
-  'cold-night-mode': isCold() && isNightTime(),
+  'cold-night-mode': isCold() && isNightTime() && !isHotNight(),
   'clear-day-mode': isClear() && !isNightTime(),
-  'clear-night-mode': isClear() && isNightTime()
+  'clear-night-mode': isClear() && isNightTime() && !isHotNight()
 }">
   <div class="search-bar">
     <form #form="ngForm" (ngSubmit)="onSubmit()">
@@ -24,15 +25,18 @@
     <div *ngIf="isClear() && !isNightTime() && !isSunnyDay()">
       <div class="icon clear-day-icon"></div>
     </div>
-    <div *ngIf="isClear() && isNightTime()">
+    <div *ngIf="isClear() && isNightTime() && !isHotNight()">
       <div class="icon clear-night-icon"></div>
+    </div>
+    <div *ngIf="isHotNight()">
+      <div class="icon hot-night-icon"></div>
     </div>
     
     <div *ngIf="isCold() && !isNightTime()">
       <div class="icon cold-day-icon"></div>
       <div class="snowflake"></div>
     </div>
-    <div *ngIf="isCold() && isNightTime()">
+    <div *ngIf="isCold() && isNightTime() && !isHotNight()">
       <div class="icon cold-night-icon"></div>
       <div class="snowflake"></div>
     </div>
@@ -76,11 +80,12 @@
       </div>
       <!-- Proverb for each mode -->
       <div *ngIf="isSunnyDay()" class="proverb">“The sun is shining, the weather is sweet.”</div>
-      <div *ngIf="isNightTime()" class="proverb">“The night is dark and full of stars.”</div>
+      <div *ngIf="isNightTime() && !isHotNight()" class="proverb">“The night is dark and full of stars.”</div>
+      <div *ngIf="isHotNight()" class="proverb">“A hot night, a warm breeze.”</div>
       <div *ngIf="isCold() && !isNightTime()" class="proverb">“Cold hands, warm heart.”</div>
-      <div *ngIf="isCold() && isNightTime()" class="proverb">“A cold night, a warm fire.”</div>
+      <div *ngIf="isCold() && isNightTime() && !isHotNight()" class="proverb">“A cold night, a warm fire.”</div>
       <div *ngIf="isClear() && !isNightTime()" class="proverb">“Clear skies, clear mind.”</div>
-      <div *ngIf="isClear() && isNightTime()" class="proverb">“A clear night, a peaceful sleep.”</div>
+      <div *ngIf="isClear() && isNightTime() && !isHotNight()" class="proverb">“A clear night, a peaceful sleep.”</div>
     </div>
   </div>
 
@@ -88,6 +93,7 @@
     <p>Error loading weather data. Please try again later.</p>
   </div>
 </div>
+
 
 
 
