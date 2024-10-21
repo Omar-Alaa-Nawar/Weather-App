@@ -1,1 +1,718 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Overlock');
+
+body {
+  background: #643a7a;
+}
+
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.6);
+  background-image: linear-gradient(to top, #40334f, #2f273c, #272232, #201c29);
+  color: #4b384c;
+  font-family: 'overlock', Helvetica, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+.weather-description {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+}
+
+.sunny {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 100px;
+  height: 100px;
+  background: yellow;
+  border-radius: 50%;
+  animation: sunny-animation 5s infinite;
+}
+
+.clear {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 100px;
+  height: 100px;
+  background: lightblue;
+  border-radius: 50%;
+  animation: clear-animation 5s infinite;
+}
+
+.chilly {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 100px;
+  height: 100px;
+  background: lightgreen;
+  border-radius: 50%;
+  animation: chilly-animation 5s infinite;
+}
+
+.cold {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 100px;
+  height: 100px;
+  background: lightblue;
+  border-radius: 50%;
+  animation: cold-animation 5s infinite;
+}
+
+.windy {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 100px;
+  height: 100px;
+  background: gray;
+  border-radius: 50%;
+  animation: windy-animation 5s infinite;
+}
+
+@keyframes sunny-animation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes clear-animation {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes chilly-animation {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes cold-animation {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes windy-animation {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}
+
+.search-bar {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.city-name {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 36px;
+  color: #fff;
+  text-align: center;
+}
+
+
+
+
+/* Cold day mode styles */
+.cold-day-mode {
+  background-image: linear-gradient(to top, #001f3f, #003366, #004080, #004d99, #0059b3);
+}
+
+.cold-day-mode .icon {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  top: 45px;
+  left: 55px;
+  border-radius: 50%;
+  background-image: linear-gradient(to right top, #ffd700, #ffcc00, #ffb300, #ffa000, #ff8f00);
+  box-shadow: 0 0 2rem rgba(255, 215, 0, 0.7);
+  animation: rise 1s ease-out;
+}
+
+.cold-day-mode .icon:hover {
+  transform: scale(1.2);
+  transition: 3s;
+}
+
+.cold-day-mode .snowflake {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  top: 80px;
+  left: 70px;
+  background: url('C:/Users/omar.nawar/Desktop/Angular/Weather App Project/WeatherApp/src/assets/snowflake_615669.png') no-repeat center center;
+  background-size: contain;
+  animation: fall 3s ease-out infinite;
+}
+.cold-day-mode .snowflake,
+.cold-night-mode .snowflake {
+  top: 9rem; /* Positioned below the sun-like icon */
+  left: 2rem; /* Positioned in the top left */
+  transform: translateX(0);
+}
+
+.cold-day-mode .hill-bg-1, .cold-day-mode .hill-bg-2, .cold-day-mode .hill-fg-1, .cold-day-mode .hill-fg-2, .cold-day-mode .hill-fg-3 {
+  position: absolute;
+  z-index: 2;
+  width: 337px;
+  height: 281px;
+  top: 201px;
+  left: -57px;
+  background: #87ceeb;
+  border-radius: 50%;
+  box-shadow: -0.5rem 0 0.8rem rgba(0, 0, 0, 0.3);
+}
+
+.cold-day-mode .hill-bg-2 {
+  top: 177px;
+  left: 177px;
+}
+
+.cold-day-mode .hill-fg-1, .cold-day-mode .hill-fg-2, .cold-day-mode .hill-fg-3 {
+  background: #add8e6;
+  top: 228px;
+  left: -137px;
+}
+
+.cold-day-mode .hill-fg-2 {
+  top: 251px;
+  left: 63px;
+}
+
+.cold-day-mode .hill-fg-3 {
+  top: 218px;
+  left: 292px;
+}
+
+@keyframes rise {
+  from {
+    transform: translate(-40px, 20px);
+  }
+  to {
+    transform: translate(0, 0px);
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+.cold-night-mode {
+  background-image: linear-gradient(to top, #0b0c10, #1f2833, #2c3e50, #4b6584, #6c5b7b);
+}
+
+.cold-night-mode .icon {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  top: 45px;
+  left: 55px;
+  border-radius: 50%;
+  background-image: linear-gradient(to left top, #b1b1c5, #928fa3, #746f82, #575162, #3c3444);
+  box-shadow: 0 0 3rem rgba(177, 177, 197, 0.8);
+  animation: rise 1s ease-out;
+}
+
+.cold-night-mode .icon:hover {
+  transform: scale(1.2);
+  transition: 3s;
+}
+
+.cold-night-mode .snowflake {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  top: 9rem; /* Positioned below the sun-like icon */
+  left: 2rem; /* Positioned in the top left */
+  background: url('C:/Users/omar.nawar/Desktop/Angular/Weather App Project/WeatherApp/src/assets/snowflake_615669.png') no-repeat center center;
+  background-size: contain;
+  animation: fall 3s ease-out infinite;
+}
+
+.cold-night-mode .hill-bg-1, .cold-night-mode .hill-bg-2, .cold-night-mode .hill-fg-1, .cold-night-mode .hill-fg-2, .cold-night-mode .hill-fg-3 {
+  position: absolute;
+  z-index: 2;
+  width: 337px;
+  height: 281px;
+  top: 201px;
+  left: -57px;
+  background: #503760;
+  border-radius: 50%;
+  box-shadow: -0.5rem 0 0.8rem rgba(0, 0, 0, 0.3);
+}
+
+.cold-night-mode .hill-bg-2 {
+  top: 177px;
+  left: 177px;
+}
+
+.cold-night-mode .hill-fg-1, .cold-night-mode .hill-fg-2, .cold-night-mode .hill-fg-3 {
+  background: #695b93;
+  top: 228px;
+  left: -137px;
+}
+
+.cold-night-mode .hill-fg-2 {
+  top: 251px;
+  left: 63px;
+}
+
+.cold-night-mode .hill-fg-3 {
+  top: 218px;
+  left: 292px;
+}
+
+@keyframes rise {
+  from {
+    transform: translate(-40px, 20px);
+  }
+  to {
+    transform: translate(0, 0px);
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+
+/* Clear day mode styles */
+.clear-day-mode {
+  background-image: linear-gradient(to top, #87ceeb, #b0e0e6, #add8e6, #b0e0e6, #87ceeb);
+}
+
+.clear-day-mode .icon {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  top: 45px;
+  left: 55px;
+  border-radius: 50%;
+  background-image: linear-gradient(to right top, #ffdd57, #ffcc33, #ffbb00, #ffaa00, #ff9900);
+  box-shadow: 0 0 3rem rgba(255, 221, 87, 0.8);
+  animation: rise 1s ease-out;
+}
+
+.clear-day-mode .icon:hover {
+  transform: scale(1.2);
+  transition: 3s;
+}
+
+.clear-day-mode .hill-bg-1, .clear-day-mode .hill-bg-2, .clear-day-mode .hill-fg-1, .clear-day-mode .hill-fg-2, .clear-day-mode .hill-fg-3 {
+  position: absolute;
+  z-index: 2;
+  width: 337px;
+  height: 281px;
+  top: 201px;
+  left: -57px;
+  background: #87ceeb;
+  border-radius: 50%;
+  box-shadow: -0.5rem 0 0.8rem rgba(0, 0, 0, 0.3);
+}
+
+.clear-day-mode .hill-bg-2 {
+  top: 177px;
+  left: 177px;
+}
+
+.clear-day-mode .hill-fg-1, .clear-day-mode .hill-fg-2, .clear-day-mode .hill-fg-3 {
+  background: #add8e6;
+  top: 228px;
+  left: -137px;
+}
+
+.clear-day-mode .hill-fg-2 {
+  top: 251px;
+  left: 63px;
+}
+
+.clear-day-mode .hill-fg-3 {
+  top: 218px;
+  left: 292px;
+}
+
+/* Clear night mode styles */
+.clear-night-mode {
+  background-image: linear-gradient(to top, #0b0c10, #1f2833, #2c3e50, #4b6584, #6c5b7b);
+}
+
+.clear-night-mode .icon {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  top: 45px;
+  left: 55px;
+  border-radius: 50%;
+  background-image: linear-gradient(to left top, #b1b1c5, #928fa3, #746f82, #575162, #3c3444);
+  box-shadow: 0 0 3rem rgba(177, 177, 197, 0.8);
+  animation: rise 1s ease-out;
+}
+
+.clear-night-mode .icon:hover {
+  transform: scale(1.2);
+  transition: 3s;
+}
+
+.clear-night-mode .hill-bg-1, .clear-night-mode .hill-bg-2, .clear-night-mode .hill-fg-1, .clear-night-mode .hill-fg-2, .clear-night-mode .hill-fg-3 {
+  position: absolute;
+  z-index: 2;
+  width: 337px;
+  height: 281px;
+  top: 201px;
+  left: -57px;
+  background: #503760;
+  border-radius: 50%;
+  box-shadow: -0.5rem 0 0.8rem rgba(0, 0, 0, 0.3);
+}
+
+.clear-night-mode .hill-bg-2 {
+  top: 177px;
+  left: 177px;
+}
+
+.clear-night-mode .hill-fg-1, .clear-night-mode .hill-fg-2, .clear-night-mode .hill-fg-3 {
+  background: #695b93;
+  top: 228px;
+  left: -137px;
+}
+
+.clear-night-mode .hill-fg-2 {
+  top: 251px;
+  left: 63px;
+}
+
+.clear-night-mode .hill-fg-3 {
+  top: 218px;
+  left: 292px;
+}
+
+@keyframes rise {
+  from {
+    transform: translate(-40px, 20px);
+  }
+  to {
+    transform: translate(0, 0px);
+  }
+}
+.cold-day-mode .icon,
+.cold-night-mode .icon,
+.clear-day-mode .icon,
+.clear-night-mode .icon {
+  position: absolute;
+  top: 4rem; /* Slightly lower to overlap with the search bar */
+  left: 2rem; /* Positioned in the top left */
+  transform: translateX(0);
+}
+
+/* Sunny mode styles */
+.sunny-mode {
+  background-image: linear-gradient(to top, #ffeb3b, #ffcc00, #ffb300, #ffa000, #ff8f00);
+}
+
+.sunny-mode .icon {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  top: 5rem; /* Adjusted to be slightly lower */
+  left: 2rem; /* Positioned in the top left */
+  border-radius: 50%;
+  background-image: linear-gradient(to right top, #ffdd57, #ffcc33, #ffbb00, #ffaa00, #ff9900);
+  box-shadow: 0 0 3rem rgba(255, 221, 87, 0.8);
+  animation: rise 1s ease-out;
+  transform: translateX(0);
+}
+
+.sunny-mode .icon:hover {
+  transform: scale(1.2);
+  transition: 3s;
+}
+
+
+
+.sunny-mode .hill-bg-1, .sunny-mode .hill-bg-2, .sunny-mode .hill-fg-1, .sunny-mode .hill-fg-2, .sunny-mode .hill-fg-3 {
+  position: absolute;
+  z-index: 2;
+  width: 337px;
+  height: 281px;
+  top: 201px;
+  left: -57px;
+  background: #87ceeb;
+  border-radius: 50%;
+  box-shadow: -0.5rem 0 0.8rem rgba(0, 0, 0, 0.3);
+}
+
+.sunny-mode .hill-bg-2 {
+  top: 177px;
+  left: 177px;
+}
+
+.sunny-mode .hill-fg-1, .sunny-mode .hill-fg-2, .sunny-mode .hill-fg-3 {
+  background: #add8e6;
+  top: 228px;
+  left: -137px;
+}
+
+.sunny-mode .hill-fg-2 {
+  top: 251px;
+  left: 63px;
+}
+
+.sunny-mode .hill-fg-3 {
+  top: 218px;
+  left: 292px;
+}
+
+
+
+
+
+/* Night mode styles */
+.night-mode .moon {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  top: 45px;
+  left: 55px;
+  border-radius: 50px;
+  background-image: linear-gradient(to left top, #b1b1c5, #928fa3, #746f82, #575162, #3c3444);
+  box-shadow: 0 0 3rem rgba(177, 177, 197, 0.8);
+  animation: rise 1s ease-out;
+}
+
+.night-mode .moon:hover {
+  transform: scale(1.2);
+  transition: 3s;
+  transform: scale(1.2) translateX(0);
+  transition: 3s;
+  position: absolute;
+  top: 6rem; /* Moved down to avoid overlapping with the search bar */
+  left: 2rem; /* Positioned in the top left */
+}
+
+.night-mode .moon-crater1 {
+  position: absolute;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  border: 4px solid rgba(60, 52, 68, 0.9);
+  top: 1rem;
+  left: 0.8rem;
+}
+
+.night-mode .moon-crater2 {
+  position: absolute;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: rgba(60, 52, 68, 0.85);
+  top: 3.4rem;
+  left: 2.8rem;
+}
+
+.night-mode .hill-bg-1, .night-mode .hill-bg-2, .night-mode .hill-fg-1, .night-mode .hill-fg-2, .night-mode .hill-fg-3 {
+  position: absolute;
+  z-index: 2;
+  width: 337px;
+  height: 281px;
+  top: 201px;
+  left: -57px;
+  background: #503760;
+  border-radius: 50%;
+  box-shadow: -0.5rem 0 0.8rem rgba(0, 0, 0, 0.3);
+}
+
+.night-mode .hill-bg-2 {
+  top: 177px;
+  left: 177px;
+}
+
+.night-mode .hill-fg-1, .night-mode .hill-fg-2, .night-mode .hill-fg-3 {
+  background: #695b93;
+  top: 228px;
+  left: -137px;
+}
+
+.night-mode .hill-fg-2 {
+  top: 251px;
+  left: 63px;
+}
+
+.night-mode .hill-fg-3 {
+  top: 218px;
+  left: 292px;
+}
+
+
+.front {
+  position: absolute;
+  z-index: 10;
+  width: 400px;
+  height: 140px;
+  left: 0;
+  bottom: -53px;
+  background: #fff;
+	box-shadow: -1rem 0 1rem rgba(0, 0, 0, .5);
+	animation: slide 1s;
+	transition: 1s ease-in-out;
+	z-index: 1000;
+	&:hover {
+		bottom: 0;
+	}
+}
+
+@keyframes slide {
+	0%, 45% {
+		transform: translateY(90px);
+	}
+	to {
+		transform: translateY(0px);
+	}
+}
+
+.front .temperature {
+  float: left;
+  margin-left: 20px;
+  font-size: 45px;
+  line-height: 90px;
+}
+.front .info {
+  float: left;
+  margin: 2rem 0 0 3rem;
+  font-size: 1.2rem;
+  line-height: 20px;
+}
+.icons {
+	position: absolute;
+	top: 2rem;
+	left: 7rem;
+	line-height: 20px;
+}
+.front .preview {
+  float: right;
+  font-weight: 400;
+  text-align: right;
+  font-size: 1.2rem;
+  line-height: 20px;
+  margin: 25px 20px 0 0;
+}
+.front .preview td {
+  padding: 0 3px;
+  text-transform: uppercase;
+}
+
+
+
+@keyframes drop {
+  0% {
+            transform: translate3d(40px, -320px, 0) scaleX(1) scaleY(1) rotate(17deg);
+  }
+  85% {
+            transform: translate3d(0, 0, 0) scaleX(1) scaleY(1) rotate(17deg);
+  }
+  100% {
+            transform: translate3d(0, 0, 0) scaleX(3) scaleY(0) rotate(0deg);
+  }
+}
+@keyframes rise {
+  from {
+            transform: translate(-40px, 20px);
+  }
+  to {
+            transform: translate(0, 0px);
+  }
+}
+
+/* Common proverb styles */
+.proverb {
+  font-size: 1.3rem;
+  position: absolute;
+  top: 60%;
+  left: 0%;
+  text-align: center;
+  width: 100%;
+  padding: .5rem 0;
+  background: #d1baca;
+  height: 100%;
+}
+
+/* Proverb styles for each mode */
+.sunny-mode .proverb {
+  background: #ffeb3b;
+}
+
+.night-mode .proverb {
+  background: #1f2833;
+  color: #fff;
+}
+
+.cold-day-mode .proverb {
+  background: #87ceeb;
+}
+
+.cold-night-mode .proverb {
+  background: #4b6584;
+  color: #fff;
+}
+
+.clear-day-mode .proverb {
+  background: #add8e6;
+}
+
+.clear-night-mode .proverb {
+  background: #2c3e50;
+  color: #fff;
+}
