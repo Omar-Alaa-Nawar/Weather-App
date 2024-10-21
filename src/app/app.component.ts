@@ -17,13 +17,16 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent implements OnInit {
 
   constructor(private weatherService: WeatherService) { }
-  cityName: string = 'Cairo';
+  cityName: string = '';
   weatherData?: WeatherData;
   mode: 'day' | 'night' | 'default' = 'default';
+  latitude: number = 0;
+  longitude: number = 0;
+  error: boolean = false;
 
   ngOnInit(): void {
-    this.getWeatherData(this.cityName);
-    this.cityName = '';
+    console.log('ngOnInit called');
+    this.getUserLocation();
   }
 
   onSubmit() {
@@ -33,6 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   private getWeatherData(cityName: string) {
+    this.error = false;
     console.log('Fetching weather data for:', cityName);
     this.weatherService.getWeatherData(cityName)
       .subscribe({
@@ -43,8 +47,49 @@ export class AppComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error fetching weather data:', err);
+          this.error = true;
         }
       });
+  }
+
+  private getWeatherDataByCoords(lat: number, lon: number) {
+    this.error = false;
+    console.log('Fetching weather data for coordinates:', lat, lon);
+    this.weatherService.getWeatherDataByCoords(lat, lon)
+      .subscribe({
+        next: (response) => {
+          this.weatherData = response;
+          console.log('Weather data received:', response);
+          this.updateMode();
+        },
+        error: (err) => {
+          console.error('Error fetching weather data:', err);
+          this.error = true;
+        }
+      });
+  }
+
+  getUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        console.log('User location:', this.latitude, this.longitude);
+        this.getWeatherDataByCoords(this.latitude, this.longitude);
+      }, (error) => {
+        console.error('Error getting location', error);
+        // Fallback to a default location if geolocation fails
+        this.getWeatherData('Cairo');
+      }, {
+        enableHighAccuracy: true, // Enable high accuracy mode
+        timeout: 10000, // Set a timeout (in milliseconds)
+        maximumAge: 0 // Do not use cached location
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      // Fallback to a default location if geolocation is not supported
+      this.getWeatherData('Cairo');
+    }
   }
 
   getLocalTime(timezoneOffset: number): Date {

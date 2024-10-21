@@ -9,6 +9,7 @@
   <div class="search-bar">
     <form #form="ngForm" (ngSubmit)="onSubmit()">
       <input type="text" placeholder="Search city" name="city" [(ngModel)]="cityName">
+      
     </form>
   </div>
 
@@ -18,24 +19,26 @@
     
     <!-- Weather animations -->
     <div *ngIf="isSunnyDay()">
-      <div class="icon"></div>
+      <div class="icon sunny-icon"></div>
     </div>
     <div *ngIf="isClear() && !isNightTime() && !isSunnyDay()">
-      <div class="icon"></div>
+      <div class="icon clear-day-icon"></div>
     </div>
     <div *ngIf="isClear() && isNightTime()">
-      <div class="icon"></div>
+      <div class="icon clear-night-icon"></div>
     </div>
     
     <div *ngIf="isCold() && !isNightTime()">
-      <div class="icon"></div>
+      <div class="icon cold-day-icon"></div>
       <div class="snowflake"></div>
     </div>
     <div *ngIf="isCold() && isNightTime()">
-      <div class="icon"></div>
+      <div class="icon cold-night-icon"></div>
       <div class="snowflake"></div>
     </div>
-    <div *ngIf="isWindy() && !isNightTime()"></div>
+    <div *ngIf="isWindy() && !isNightTime()">
+      <div class="icon windy-icon"></div>
+    </div>
     
     <!-- Hills background -->
     <div class="hill-bg-1"></div>
@@ -80,7 +83,13 @@
       <div *ngIf="isClear() && isNightTime()" class="proverb">“A clear night, a peaceful sleep.”</div>
     </div>
   </div>
+
+  <div *ngIf="error">
+    <p>Error loading weather data. Please try again later.</p>
+  </div>
 </div>
+
+
 
 
 
