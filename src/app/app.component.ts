@@ -70,22 +70,28 @@ export class AppComponent implements OnInit {
         }
       });
   }
-
+  
   getUserLocation() {
     if (navigator.geolocation) {
+      // Show loading indicator
+      this.showLoadingIndicator();
+  
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         console.log('User location:', this.latitude, this.longitude);
         this.getWeatherDataByCoords(this.latitude, this.longitude);
+        // Hide loading indicator
+        this.hideLoadingIndicator();
       }, (error) => {
         console.error('Error getting location', error);
         // Fallback to a default location if geolocation fails
         this.getWeatherData('Cairo');
+        // Hide loading indicator
+        this.hideLoadingIndicator();
       }, {
-        enableHighAccuracy: true, // Enable high accuracy mode
-        timeout: 10000, // Set a timeout (in milliseconds)
-        maximumAge: 0 // Do not use cached location
+        timeout: 5000, // Set a shorter timeout (in milliseconds)
+        maximumAge: 60000 // Allow using cached location up to 1 minute old
       });
     } else {
       console.error('Geolocation is not supported by this browser.');
@@ -93,6 +99,17 @@ export class AppComponent implements OnInit {
       this.getWeatherData('Cairo');
     }
   }
+  
+  showLoadingIndicator() {
+    // Implement your loading indicator logic here
+    console.log('Loading...');
+  }
+  
+  hideLoadingIndicator() {
+    // Implement your logic to hide the loading indicator here
+    console.log('Loading complete.');
+  }
+  
 
   getLocalTime(timezoneOffset: number): Date {
     const utcTime = new Date().getTime() + new Date().getTimezoneOffset() * 60000;
