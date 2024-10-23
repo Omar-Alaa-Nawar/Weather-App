@@ -10,7 +10,6 @@
   <div class="search-bar">
     <form #form="ngForm" (ngSubmit)="onSubmit()">
       <input type="text" placeholder="Search city" name="city" [(ngModel)]="cityName">
-      
     </form>
   </div>
 
@@ -31,7 +30,6 @@
     <div *ngIf="isHotNight()">
       <div class="icon hot-night-icon"></div>
     </div>
-    
     <div *ngIf="isCold() && !isNightTime()">
       <div class="icon cold-day-icon"></div>
       <div class="snowflake"></div>
@@ -93,6 +91,7 @@
     <p>Error loading weather data. Please try again later.</p>
   </div>
 </div>
+
 
 
 

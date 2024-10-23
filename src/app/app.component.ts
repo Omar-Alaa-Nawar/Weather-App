@@ -111,55 +111,48 @@ export class AppComponent implements OnInit {
   }
   
 
-  getLocalTime(timezoneOffset: number): Date {
-    const utcTime = new Date().getTime() + new Date().getTimezoneOffset() * 60000;
-    return new Date(utcTime + timezoneOffset * 1000);
-  }
-
   isNightTime(): boolean {
-    if (!this.weatherData) {
+    if (!this.weatherData || !this.weatherData.sys) {
       return false;
     }
-    const localTime = this.getLocalTime(this.weatherData.timezone);
-    const hour = localTime.getHours();
-    const isNight = hour >= 18 || hour < 6;
+    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+    const isNight = currentTime < this.weatherData.sys.sunrise || currentTime >= this.weatherData.sys.sunset;
     console.log('isNightTime:', isNight);
     return isNight;
   }
-
+  
   isHotNight(): boolean {
     return this.isNightTime() && this.weatherData?.main?.temp !== undefined && this.weatherData.main.temp > 30;
   }
   
-
   isSunnyDay(): boolean {
     return !this.isNightTime() && this.weatherData?.main?.temp !== undefined && this.weatherData.main.temp > 30;
   }
-
+  
   isSunny(): boolean {
     const isSunny = this.isSunnyDay();
     console.log('isSunny:', isSunny);
     return isSunny;
   }
-
+  
   isClear(): boolean {
     const isClear = this.weatherData?.main?.temp !== undefined && this.weatherData.main.temp >= 15 && this.weatherData.main.temp <= 30;
     console.log('isClear:', isClear);
     return isClear;
   }
-
+  
   isCold(): boolean {
     const isCold = this.weatherData?.main?.temp !== undefined && this.weatherData.main.temp < 15;
     console.log('isCold:', isCold);
     return isCold;
   }
-
+  
   isWindy(): boolean {
     const isWindy = this.weatherData?.wind?.speed !== undefined && this.weatherData.wind.speed > 25;
     console.log('isWindy:', isWindy);
     return isWindy;
   }
-
+  
   updateMode() {
     if (this.isNightTime()) {
       this.mode = 'night';
